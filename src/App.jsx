@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Search, ShoppingBag, MapPin, Instagram, Linkedin, Phone, X } from 'lucide-react';
+import { Heart, Search, ShoppingBag, MapPin, Instagram, Linkedin, Phone, X, Menu } from 'lucide-react';
 import logo from './assets/logo.png';
 const WillowsBloomsLanding = () => {
   const [hoveredProduct, setHoveredProduct] = useState(null);
@@ -8,6 +8,7 @@ const WillowsBloomsLanding = () => {
   const [selectedCategory, setSelectedCategory] = useState('GIFTS');
   const [wishlistItems, setWishlistItems] = useState(new Set());
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Simulate loading
@@ -186,7 +187,16 @@ const WillowsBloomsLanding = () => {
       <nav className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-12 text-sm">
-            <div className="flex space-x-8">
+            {/* Mobile Menu Button */}
+            <button 
+              className="lg:hidden p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <Menu className="h-6 w-6" />
+            </button>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex space-x-8">
               <a href="#" onClick={handleLinkClick} className="text-gray-900 hover:text-gray-600 font-medium border-b-2 border-black pb-3">Gifts</a>
               <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Cakes</a>
               <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Bouquets</a>
@@ -195,13 +205,38 @@ const WillowsBloomsLanding = () => {
               <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Bespoke</a>
               <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Sustainability</a>
             </div>
+
+            {/* Mobile Navigation Menu */}
+            <div className={`lg:hidden fixed inset-0 bg-white z-50 transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
+              <div className="p-4">
+                <div className="flex justify-between items-center mb-8">
+                  <img src={logo} alt="Willows & Blooms" className="w-32" />
+                  <button 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-2"
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
+                </div>
+                <div className="flex flex-col space-y-4">
+                  <a href="#" onClick={handleLinkClick} className="text-gray-900 hover:text-gray-600 font-medium border-b-2 border-black pb-2">Gifts</a>
+                  <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Cakes</a>
+                  <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Bouquets</a>
+                  <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Corporate</a>
+                  <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Occasions</a>
+                  <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Bespoke</a>
+                  <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Sustainability</a>
+                </div>
+              </div>
+            </div>
+
             <div className="flex items-center space-x-6">
-              <button onClick={handleLinkClick} className="flex items-center space-x-1 text-gray-600 hover:text-gray-900">
+              <button onClick={handleLinkClick} className="hidden sm:flex items-center space-x-1 text-gray-600 hover:text-gray-900">
                 <Search className="h-4 w-4" />
                 <span>Search</span>
               </button>
-              <button onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Store Locator</button>
-              <button onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">Login</button>
+              <button onClick={handleLinkClick} className="hidden sm:block text-gray-600 hover:text-gray-900">Store Locator</button>
+              <button onClick={handleLinkClick} className="hidden sm:block text-gray-600 hover:text-gray-900">Login</button>
               <button onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">
                 <ShoppingBag className="h-4 w-4" />
               </button>
@@ -214,26 +249,25 @@ const WillowsBloomsLanding = () => {
       <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-8 text-center">
           <div className="flex flex-col justify-center items-center">
-            <img src={logo} alt="Willows & Blooms" className="w-42 h-42" />
-            <h1 className="text-4xl font-light tracking-wider text-gray-900 mb-8 uppercase">
+            <img src={logo} alt="Willows & Blooms" className="w-32 sm:w-42 h-32 sm:h-42" />
+            <h1 className="text-2xl sm:text-4xl font-light tracking-wider text-gray-900 mb-8 uppercase px-4">
               Exclusive Gifting for Professionals
             </h1>
-            <nav className="flex justify-center space-x-12 text-sm">
-            <a href="#" onClick={handleLinkClick} className="text-gray-900 hover:text-gray-600 font-medium">NEW IN</a>
-            <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">CAKES</a>
-            <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">BOUQUETS</a>
-            <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">CORPORATE GIFTS</a>
-            <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">OCCASIONS</a>
-            <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">BESPOKE SERVICES</a>
-          </nav>
+            <nav className="hidden md:flex justify-center space-x-6 lg:space-x-12 text-sm">
+              <a href="#" onClick={handleLinkClick} className="text-gray-900 hover:text-gray-600 font-medium">NEW IN</a>
+              <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">CAKES</a>
+              <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">BOUQUETS</a>
+              <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">CORPORATE GIFTS</a>
+              <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">OCCASIONS</a>
+              <a href="#" onClick={handleLinkClick} className="text-gray-600 hover:text-gray-900">BESPOKE SERVICES</a>
+            </nav>
           </div>
-          
         </div>
       </div>
 
       {/* Hero Section */}
       <section className="relative">
-        <div className="w-full h-[400px] relative overflow-hidden">
+        <div className="w-full h-[300px] sm:h-[400px] relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-black/30 z-10"></div>
           <img 
             src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=1920&h=1080&fit=crop" 
@@ -242,11 +276,11 @@ const WillowsBloomsLanding = () => {
           />
           <div className="absolute inset-0 flex items-center justify-center z-20">
             <div className="text-center text-white max-w-3xl px-4">
-              <h2 className="text-6xl font-light mb-6 tracking-wider">MONSOON COLLECTION</h2>
-              <p className="text-2xl font-light mb-8">Exclusively curated for distinguished professionals</p>
+              <h2 className="text-4xl sm:text-6xl font-light mb-4 sm:mb-6 tracking-wider">MONSOON COLLECTION</h2>
+              <p className="text-lg sm:text-2xl font-light mb-6 sm:mb-8">Exclusively curated for distinguished professionals</p>
               <button 
                 onClick={handleLinkClick}
-                className="bg-white text-gray-900 px-8 py-3 text-sm font-medium hover:bg-gray-100 transition-colors"
+                className="bg-white text-gray-900 px-6 sm:px-8 py-2 sm:py-3 text-sm font-medium hover:bg-gray-100 transition-colors"
               >
                 EXPLORE COLLECTION
               </button>
@@ -289,7 +323,7 @@ const WillowsBloomsLanding = () => {
       {/* Product Grid */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
             {products
               .filter(product => {
                 if (selectedCategory === 'GIFTS') {
@@ -327,29 +361,19 @@ const WillowsBloomsLanding = () => {
                     />
                   </button>
 
-                  {/* Pre-order Badge */}
-                  {product.preOrder && (
-                    <div className="absolute right-4 bottom-4 z-10 transform transition-all duration-300 group-hover:scale-105">
-                      <span className="bg-gray-900 text-white px-2 py-1 text-xs font-medium">
-                        PRE ORDER
-                      </span>
-                    </div>
-                  )}
-
                   {/* Product Image */}
                   <div className="relative bg-gray-100 mb-4 overflow-hidden rounded-lg">
                     <div className="aspect-w-1 aspect-h-1">
                       <img 
                         src={product.image} 
                         alt={product.name}
-                        className={`w-full h-96 object-cover transition-all duration-500 ${
+                        className={`w-full h-64 sm:h-96 object-cover transition-all duration-500 ${
                           hoveredProduct === product.id 
                             ? 'scale-110 transform' 
                             : 'scale-100'
                         }`}
                       />
                     </div>
-                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
                   </div>
 
                   {/* Product Info */}
@@ -377,9 +401,9 @@ const WillowsBloomsLanding = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
             <div className="text-center transform transition-all duration-300 hover:scale-105">
               <h3 className="text-lg font-medium text-gray-900 mb-4">ARTISAN CRAFTED</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
@@ -403,14 +427,14 @@ const WillowsBloomsLanding = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 border-t border-gray-200">
+      <section className="py-12 sm:py-16 border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-light text-gray-900 mb-4">STAY INFORMED</h2>
+          <h2 className="text-xl sm:text-2xl font-light text-gray-900 mb-4">STAY INFORMED</h2>
           <p className="text-gray-600 mb-8 max-w-md mx-auto">
             Be the first to discover our new collections and exclusive offers.
           </p>
           <div className="max-w-md mx-auto">
-            <div className="flex">
+            <div className="flex flex-col sm:flex-row gap-4">
               <input 
                 type="email" 
                 placeholder="Enter your email address"
@@ -430,15 +454,13 @@ const WillowsBloomsLanding = () => {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-           
-            <div className=" text-center md:text-left">
-            {/* <img src={logo} alt="Willows & Blooms" className="w-32 h-32" /> */}
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+            <div className="text-center md:text-left">
               <h3 className="text-lg font-light tracking-wider mb-2">WILLOWS & BLOOMS</h3>
               <p className="text-sm text-gray-400">Crafting moments of distinction</p>
             </div>
             
-            <div className="flex items-center space-x-8">
+            <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8">
               <div className="flex items-center space-x-2 text-gray-300">
                 <Phone className="h-4 w-4" />
                 <span className="text-sm">+91 8095056886</span>
@@ -447,7 +469,6 @@ const WillowsBloomsLanding = () => {
                 <MapPin className="h-4 w-4" />
                 <span className="text-sm">Bangaluru, Karnataka</span>
               </div>
-             
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
                   <Instagram className="h-5 w-5" />
