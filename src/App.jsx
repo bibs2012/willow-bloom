@@ -270,7 +270,7 @@ const WillowsBloomsLanding = () => {
         <div className="w-full h-[300px] sm:h-[400px] relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-black/30 z-10"></div>
           <img 
-            src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=1920&h=1080&fit=crop" 
+            src="https://images.unsplash.com/photo-1674620213535-9b2a2553ef40?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
             alt="Luxury Collection" 
             className="w-full h-full object-cover object-center"
           />
