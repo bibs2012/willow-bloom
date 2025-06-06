@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Search, ShoppingBag, User, MapPin, Instagram, Linkedin, Phone, Mail, X } from 'lucide-react';
+import { Heart, Search, ShoppingBag, MapPin, Instagram, Linkedin, Phone, X } from 'lucide-react';
 import logo from './assets/logo.png';
 const WillowsBloomsLanding = () => {
   const [hoveredProduct, setHoveredProduct] = useState(null);
